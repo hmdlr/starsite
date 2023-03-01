@@ -1,0 +1,63 @@
+@import './variables';
+@import './mixins';
+
+* {
+  font: 100% $primaryFont;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+}
+
+h1 {
+  font-size: 4.375rem;
+  line-height: 8.313rem;
+
+  @include smMinBreakpoint {
+    font-size: 5.875rem;
+    line-height: 9.313rem;
+  }
+
+  @include mdMinBreakpoint {
+    font-size: 6.875rem;
+    line-height: 10.313rem;
+  }
+}
+
+h2 {
+  font-size: 2.5rem;
+  line-height: 7.063rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+
+  @include mdMinBreakpoint {
+    font-size: 2.5rem;
+    line-height: 3.75rem;
+  }
+}
+
+span {
+  font-weight: 800;
+  line-height: 2.375rem;
+}
+
+p {
+  font-weight: 300;
+  font-size: 1.875rem;
+  line-height: 2.813rem;
+}
+
+a {
+  font-weight: 700;
+  line-height: 2.188rem;
+  font-size: 1.438rem;
+}
+
+label {
+  font-weight: 700;
+  line-height: 2.188rem;
+  font-size: 1.438rem;
+}

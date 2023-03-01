@@ -1,0 +1,5 @@
+@import '../../sassStyles/_mixins.scss';
+
+.gradient-body {
+    @include gradientBody;
+}

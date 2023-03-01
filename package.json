@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chakra-ui/react": "^2.4.8",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
     "@hmdlr/types": "^2.2.0",
     "@hmdlr/utils": "^0.1.13",
     "@testing-library/jest-dom": "^5.16.5",
@@ -22,6 +19,7 @@
     "react-icons": "^3.11.0",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
+    "sass": "^1.58.3",
     "typescript": "^4.9.4",
     "web-vitals": "^2.1.4"
   },

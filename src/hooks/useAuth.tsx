@@ -1,7 +1,6 @@
-import { AxiosResponse } from "axios";
-import React, { useEffect } from "react";
+import axios, { AxiosResponse } from "axios";
+import React, { useCallback, useEffect } from "react";
 import { getParsedJwt } from "../utils/utils";
-import { useClient } from "./useClient";
 import env from "../env";
 import { Microservice } from "@hmdlr/utils/dist/Microservice";
 
@@ -10,6 +9,7 @@ const authContext = React.createContext<{
   token: string | undefined;
   signIn: (username: string, password: string) => Promise<AxiosResponse>;
   signOut: () => void;
+  sendExtToken: (extToken: string) => Promise<any | undefined>;
 }>(undefined!);
 
 export const ProvideAuth = ({ children }: { children: any }) => {
@@ -24,10 +24,9 @@ export const useAuth = () => {
 function useProvideAuth() {
   const [username, setUsername] = React.useState<string>();
   const [token, setToken] = React.useState<string>();
-  const { client } = useClient();
 
   const signIn = async (username: string, password: string): Promise<AxiosResponse> => {
-    const response = await client.post<{ token: string }>(
+    const response = await axios.post<{ token: string }>(
         `${env.api[Microservice.Authphish]}/auth`,
         { username, password }
     );
@@ -38,11 +37,6 @@ function useProvideAuth() {
     return response;
   };
 
-  /* After token is set */
-  useEffect(() => {
-    localStorage.setItem("token", token || "");
-  }, [token]);
-
   /* On page startup */
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -52,14 +46,37 @@ function useProvideAuth() {
     }
   }, []);
 
+  /* After token is set */
+  useEffect(() => {
+    localStorage.setItem("token", token || "");
+  }, [token]);
+
   const signOut = () => {
     setUsername(undefined);
   };
+
+  const sendExtToken = useCallback(
+      async (extToken: string): Promise<any | undefined> => {
+        if (!token) return;
+        return await fetch(
+            `${env.api[Microservice.Authphish]}/auth/ext-token`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+              },
+              body: JSON.stringify({ halfToken: extToken })
+            }
+        );
+      }
+      , [token]);
 
   return {
     username,
     token,
     signIn,
     signOut,
+    sendExtToken,
   };
 }

@@ -1,9 +1,12 @@
-import { ColorModeScript } from "@chakra-ui/react"
 import * as React from "react"
 import * as ReactDOM from "react-dom/client"
 import { App } from "./App"
 import reportWebVitals from "./reportWebVitals"
 import * as serviceWorker from "./serviceWorker"
+import './sassStyles/_typography.scss';
+import './sassStyles/_globals.scss';
+import './sassStyles/_colorings.scss';
+import './sassStyles/_spacings.scss';
 
 
 const container = document.getElementById("root")
@@ -12,7 +15,6 @@ const root = ReactDOM.createRoot(container)
 
 root.render(
   <React.StrictMode>
-    <ColorModeScript />
     <App />
   </React.StrictMode>,
 )

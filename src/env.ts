@@ -13,4 +13,5 @@ export default {
   },
   commPort: 'starph1sh',
   tokenLocation: 'starphish-token',
+  chromeStoreUrl: 'https://chrome.google.com/webstore/detail/heimdallr/mgcclljnboinjppelonolbhklnnljonp'
 };

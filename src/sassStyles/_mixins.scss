@@ -1,0 +1,56 @@
+@import './variables';
+
+/* Breakpoints */
+@mixin smMinBreakpoint {
+  @media (min-width: #{$screen-sm}) {
+    @content;
+  }
+}
+
+@mixin smMaxBreakpoint {
+  @media (max-width: #{$screen-sm}) {
+    @content;
+  }
+}
+
+@mixin mdMinBreakpoint {
+  @media (min-width: #{$screen-md}) {
+    @content;
+  }
+}
+
+@mixin lgMinBreakpoint {
+  @media (min-width: #{$screen-lg}) {
+    @content;
+  }
+}
+
+@mixin xlMinBreakpoint {
+  @media (min-width: #{$screen-xl}) {
+    @content;
+  }
+}
+
+@mixin customMinBreakpoint($breakpoint) {
+  @media (min-width: #{$breakpoint}) {
+    @content;
+  }
+}
+
+@mixin customMaxBreakpoint($breakpoint) {
+  @media (max-width: #{$breakpoint}) {
+    @content;
+  }
+}
+
+/* Gradients */
+@mixin gradientBody {
+  background-repeat: no-repeat;
+  background-image: linear-gradient(186deg, rgba(0, 0, 0, 1) 4%, rgba(0, 0, 0, 1) 7%, rgba(3, 1, 43, 1) 88%, rgba(4, 2, 53, 1) 100%);
+  background-attachment: fixed;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+}

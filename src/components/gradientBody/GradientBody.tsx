@@ -1,5 +1,5 @@
 import React from "react";
-import './gradientBody.css'
+import "./gradientBody.scss";
 
 const GradientBody = (props: { children: any }) => {
   return (

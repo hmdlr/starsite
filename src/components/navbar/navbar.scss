@@ -1,0 +1,54 @@
+@import '../../sassStyles/_variables.scss';
+@import '../../sassStyles/_mixins.scss';
+
+.navbar {
+  flex-direction: row;
+  height: 3.5rem;
+  justify-content: center;
+  background-color: transparent;
+  position: relative;
+  @include smMinBreakpoint {
+    height: 4rem;
+  }
+
+  span {
+    color: $whiteTextColor;
+  }
+}
+
+.navbar__links {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  gap: 1rem;
+  @include smMinBreakpoint {
+    gap: 1.2rem;
+  }
+  @include mdMinBreakpoint {
+    gap: 1.6rem;
+  }
+  @include lgMinBreakpoint {
+    gap: 2rem;
+  }
+  @include xlMinBreakpoint {
+    gap: 3rem;
+  }
+}
+
+.navbar__logo {
+  position: absolute;
+  left: 20px;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+
+  img {
+    height: 2.5rem;
+    @include smMinBreakpoint {
+      height: 3rem;
+    }
+  }
+}

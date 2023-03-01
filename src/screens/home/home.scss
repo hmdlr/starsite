@@ -1,0 +1,10 @@
+@import "../../sassStyles/_mixins.scss";
+
+.home_container {
+  margin-top: 150px;
+  padding: 30px;
+
+  @include smMaxBreakpoint {
+    margin-top: 30px;
+  }
+}

@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import React from "react";
 import { StarClient } from "@hmdlr/types";
+import { useAuth } from "./useAuth";
 
 const defaultOptions: AxiosRequestConfig = {
   method: "GET",
@@ -31,12 +32,22 @@ export const useClient = () => {
 }
 
 function useProvideClient() {
+  const { token } = useAuth();
   const get = (url: string, options?: any) => axios.get(url, { ...defaultOptions, ...options });
   const post = (url: string, data: any, options?: any) => axios.post(url, data, { ...defaultOptions, ...options });
   const put = (url: string, data: any, options?: any) => axios.put(url, data, { ...defaultOptions, ...options });
   const deleteRequest = (url: string, options?: any) => axios.delete(url, { ...defaultOptions, ...options });
 
-
+  React.useEffect(() => {
+    axios.interceptors.request.use((config: AxiosRequestConfig) => {
+      if (!config.headers) {
+        // @ts-ignore
+        config.headers = {};
+      }
+      config.headers.Authorization = `Bearer ${token}`;
+      return config;
+    });
+  }, [token]);
 
   return {
     client: {
