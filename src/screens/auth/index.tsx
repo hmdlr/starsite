@@ -28,28 +28,43 @@ export const Auth = () => {
       <div className={'auth_container'}>
         <form
             onSubmit={handleSubmit}
+            autoComplete={'new-password'}
         >
           <div className={'auth_container_form pt30 pb30 pl70 pr70'}>
             <div className={'auth_classic_container'}>
-              <label htmlFor={'username'}>Username</label>
-              <input
-                  type="text"
-                  className={'login-input'}
-                  id={'username'}
-                  placeholder={'@username'}
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-              />
-              <label htmlFor={'password'}>Password</label>
-              <input
-                  type="password"
-                  className={'login-input'}
-                  placeholder={'password'}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-              />
-              <button type={'submit'} className={'login-button'}>Sign in</button>
-              <p>Don't have an account? <a href={'/auth/register'}>Sign up</a> or</p>
+
+              <div className="did-floating-label-content input-group">
+                <span className="input-group-prepend">
+                    <div className="input-group-text">@</div>
+                </span>
+                <input
+                    className="did-floating-input"
+                    type="text"
+                    placeholder=" "
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    autoComplete={'new-password'}
+                />
+                <label className="did-floating-label">username</label>
+              </div>
+
+              <div className="did-floating-label-content input-group mt20">
+                <span className="input-group-prepend">
+                    <div className="input-group-text"><img src="/password.svg" alt=""/></div>
+                </span>
+                <input
+                    className="did-floating-input"
+                    type="password"
+                    placeholder=" "
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    autoComplete={'new-password'}
+                />
+                <label className="did-floating-label">password</label>
+              </div>
+
+              <button type={'submit'} className={'login-button mt15'}>Sign in</button>
+              <p>Don't have an account? <a href={'/auth/register'}>Sign up</a></p>
             </div>
             <div className={'auth_social_container mt20'}>
               <button>
