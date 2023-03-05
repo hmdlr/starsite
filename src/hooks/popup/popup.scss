@@ -1,0 +1,101 @@
+@import "../../sassStyles/_variables.scss";
+@import "../../sassStyles/_mixins.scss";
+
+.popup_parent {
+  position: fixed;
+  bottom: 3rem;
+  @include smMaxBreakpoint {
+    bottom: unset;
+    top: 3rem;
+  }
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+.popup_alert {
+  position: relative;
+  min-width: 40rem;
+
+  @include smMaxBreakpoint {
+    min-width: 90%;
+  }
+
+  min-height: 4.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  vertical-align: middle;
+  z-index: 100;
+  border-radius: 0.5rem;
+  background-color: rgba($grayTextColor, 0.3);
+
+
+  &.info {
+    background-color: rgba($grayTextColor, 0.3);
+  }
+
+  &.success {
+    background-color: rgba($successColor, 0.3);
+  }
+
+  &.error {
+    background-color: rgba($errorColor, 0.3);
+  }
+
+  &.warning {
+    background-color: rgba($warningColor, 0.3);
+  }
+}
+
+.popup_text {
+  @include smMaxBreakpoint {
+    font-size: 1rem;
+    line-height: unset;
+    margin-left: 3.4rem;
+    margin-right: 1rem;
+  }
+}
+
+.popup_image {
+  position: absolute;
+  left: 3rem;
+  @include smMaxBreakpoint {
+    left: 1rem;
+  }
+  background-image: url("~/public/info.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 2rem;
+  height: 2rem;
+
+  &.info {
+    background-image: url("~/public/info.svg");
+  }
+
+  &.success {
+    background-image: url("~/public/check.svg");
+  }
+
+  &.error {
+      background-image: url("~/public/error.svg");
+  }
+
+  &.warning {
+    background-image: url("~/public/warning.svg");
+  }
+}
+
+.popup_show_event {
+  opacity: 1;
+  transition: all 0.3s linear;
+}
+
+.popup_close_event {
+  opacity: 0;
+  transition: all 0.3s linear;
+}

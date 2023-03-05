@@ -1,0 +1,38 @@
+@import '../../../sassStyles/_mixins.scss';
+
+.auth_container_text {
+  flex-direction: column;
+
+  @include smMaxBreakpoint {
+    align-items: center;
+    padding-inline: 25px;
+    margin-top: 10px;
+  }
+
+  img {
+    width: 18rem;
+    @include smMaxBreakpoint {
+      width: 12rem;
+    }
+    @include lgMinBreakpoint {
+      width: 23rem;
+    }
+  }
+
+  span {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 1rem;
+
+    @include smMaxBreakpoint {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+/* Overriding auth styles */
+.auth_container {
+  @include smMaxBreakpoint {
+    flex-direction: column;
+  }
+}

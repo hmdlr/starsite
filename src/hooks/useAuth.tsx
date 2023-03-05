@@ -8,6 +8,7 @@ const authContext = React.createContext<{
   username: string | undefined;
   token: string | undefined;
   signIn: (username: string, password: string) => Promise<AxiosResponse>;
+  signUp: (username: string, name: string, password: string, email: string) => Promise<AxiosResponse>;
   signOut: () => void;
   sendExtToken: (extToken: string) => Promise<any | undefined>;
 }>(undefined!);
@@ -36,6 +37,13 @@ function useProvideAuth() {
     }
     return response;
   };
+
+  const signUp = async (username: string, name: string, password: string, email: string): Promise<AxiosResponse> => {
+    return await axios.post<void>(
+        `${env.api[Microservice.Authphish]}/auth/signup`,
+        { username, name, password, email }
+    );
+  }
 
   /* On page startup */
   useEffect(() => {
@@ -76,6 +84,7 @@ function useProvideAuth() {
     username,
     token,
     signIn,
+    signUp,
     signOut,
     sendExtToken,
   };
