@@ -9,6 +9,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.2.3",
+    "dotenv": "^16.0.3",
     "framer-motion": "^6.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -20,26 +21,28 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
     "@types/jest": "^28.1.8",
     "@types/node": "^12.20.55",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
+    "assert": "npm:assert@^2.0.0",
     "buffer": "npm:buffer@^6.0.3",
     "crypto": "npm:crypto-browserify@^3.12.0",
+    "fs": "npm:browserify-fs@^1.0.0",
     "http": "npm:stream-http@^3.2.0",
     "https": "npm:https-browserify@^1.0.0",
-    "stream": "npm:stream-browserify@^3.0.0",
-    "util": "npm:util@^0.12.5",
-    "zlib": "npm:browserify-zlib@^0.2.0",
     "os": "npm:os-browserify@^0.3.0",
     "path": "npm:path-browserify@^1.0.1",
+    "process": "^0.11.10",
+    "react-error-overlay": "6.0.9",
+    "stream": "npm:stream-browserify@^3.0.0",
     "url": "npm:url@^0.11.0",
-    "fs": "npm:browserify-fs@^1.0.0",
-    "assert": "npm:assert@^2.0.0",
-    "react-error-overlay": "6.0.9"
+    "util": "npm:util@^0.12.5",
+    "zlib": "npm:browserify-zlib@^0.2.0"
   },
   "scripts": {
-    "start": "REACT_APP_AUTHPHISH_PORT=$AUTHPHISH_PORT REACT_APP_SCANPHISH_PORT=$SCANPHISH_PORT react-scripts start",
+    "start": "REACT_APP_AUTHPHISH_PORT=$AUTHPHISH_PORT REACT_APP_SCANPHISH_PORT=$SCANPHISH_PORT craco start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
