@@ -4,12 +4,12 @@ import './loadingButton.scss';
 export const LoadingButton = ({
                                 text,
                                 callbackFn,
-                                classes,
+                                className,
                                 ...props
                               }: {
   text: string,
   callbackFn: Function,
-  classes?: string[],
+  className?: string,
   props?: any
 }) => {
 
@@ -26,7 +26,7 @@ export const LoadingButton = ({
   return (
       <button
           type={'submit'}
-          className={'loading-button ' + classes?.join(' ')}
+          className={'loading-button ' + (className || '')}
           onClick={() => {
             setLoading(true);
           }}

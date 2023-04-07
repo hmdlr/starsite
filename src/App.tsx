@@ -10,31 +10,36 @@ import { ProvideClient } from "./hooks/useClient";
 import { Navbar } from "./components/navbar/Navbar";
 import { Register } from "./screens/auth/register";
 import { ProvidePopup } from "./hooks/popup/usePopup";
+import { ProvideStorage } from "./hooks/useStorage";
+import { Protect } from "./screens/auth/protect";
 
 
 export const App = () => {
   return (
       <div style={{ display: 'flex', height: '100vh', width: '100%', overflowX: 'hidden' }}>
-        <ProvidePopup>
-          <ProvideUrl>
-            <ProvideAuth>
-              <ProvideClient>
-                <GradientBody>
-                  <div style={{ zIndex: 2, width: '100%', flexDirection: 'column' }}>
-                    <Navbar/>
-                    <Router>
-                      <Routes>
-                        <Route path={"/"} element={<Home/>}/>
-                        <Route path={"/auth"} element={<Auth/>}/>
-                        <Route path={"/auth/register"} element={<Register/>}/>
-                      </Routes>
-                    </Router>
-                  </div>
-                </GradientBody>
-              </ProvideClient>
-            </ProvideAuth>
-          </ProvideUrl>
-        </ProvidePopup>
+        <ProvideStorage>
+          <ProvidePopup>
+            <ProvideUrl>
+              <ProvideAuth>
+                <ProvideClient>
+                  <GradientBody>
+                    <div style={{ zIndex: 2, width: '100%', flexDirection: 'column' }}>
+                      <Navbar/>
+                      <Router>
+                        <Routes>
+                          <Route path={"/"} element={<Home/>}/>
+                          <Route path={"/auth"} element={<Auth/>}/>
+                          <Route path={"/auth/register"} element={<Register/>}/>
+                          <Route path={"/protect"} element={<Protect/>}/>
+                        </Routes>
+                      </Router>
+                    </div>
+                  </GradientBody>
+                </ProvideClient>
+              </ProvideAuth>
+            </ProvideUrl>
+          </ProvidePopup>
+        </ProvideStorage>
         <Bubbles/>
       </div>
   )

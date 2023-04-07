@@ -3,6 +3,7 @@ import React, { useCallback, useEffect } from "react";
 import { getParsedJwt } from "../utils/utils";
 import env from "../env";
 import { Microservice } from "@hmdlr/utils/dist/Microservice";
+import { useStorage } from "./useStorage";
 
 const authContext = React.createContext<{
   username: string | undefined;
@@ -25,6 +26,8 @@ export const useAuth = () => {
 function useProvideAuth() {
   const [username, setUsername] = React.useState<string>();
   const [token, setToken] = React.useState<string>();
+  const { storeToken, getStoredToken } = useStorage();
+
 
   const signIn = async (username: string, password: string): Promise<AxiosResponse> => {
     const response = await axios.post<{ token: string }>(
@@ -33,6 +36,7 @@ function useProvideAuth() {
     );
     if (response.data.token) {
       setToken(response.data.token);
+      storeToken(response.data.token);
       setUsername(getParsedJwt<{ username: string }>(response.data.token)?.username);
     }
     return response;
@@ -47,17 +51,12 @@ function useProvideAuth() {
 
   /* On page startup */
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = getStoredToken();
     if (token) {
       setToken(token);
       setUsername(getParsedJwt<{ username: string }>(token)?.username);
     }
   }, []);
-
-  /* After token is set */
-  useEffect(() => {
-    localStorage.setItem("token", token || "");
-  }, [token]);
 
   const signOut = () => {
     setUsername(undefined);

@@ -1,6 +1,6 @@
 import '../auth.scss';
 import { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useUrl } from "../../../hooks/useUrl";
 import { useAuth } from "../../../hooks/useAuth";
 import { LoadingButton } from "../../../components/loadingButton/LoadingButton";
@@ -13,6 +13,7 @@ export const Auth = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ export const Auth = () => {
       } else {
         return popup.error('Invalid username or password.');
       }
-      redirect(parameters.redirect || "/"); // todo: think logic gate for signed in users and what to do after sign in
+      navigate(parameters.redirect || "/");
     } catch (e: any) {
       popup.error(e?.response?.data?.error || 'A network error occurred. Please try again.');
     }
@@ -76,7 +77,7 @@ export const Auth = () => {
               <LoadingButton
                   text={'Sign in'}
                   callbackFn={signInAction}
-                  classes={['mt15']}
+                  className={'mt15'}
               />
               <p>Don't have an account? <a href={'/auth/register'}>Sign up</a></p>
             </div>

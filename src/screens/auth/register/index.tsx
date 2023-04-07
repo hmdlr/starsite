@@ -2,14 +2,15 @@ import '../auth.scss';
 import './register.scss';
 import { useAuth } from "../../../hooks/useAuth";
 import { useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
 import { LoadingButton } from "../../../components/loadingButton/LoadingButton";
 import { usePopup } from "../../../hooks/popup/usePopup";
+import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
 
   const { signUp } = useAuth();
   const { popup } = usePopup();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +34,7 @@ export const Register = () => {
         return popup.error(response.data.message);
       }
       popup.success("Account created successfully. You may now log in.");
-      redirect("/auth");
+      navigate("/auth");
     } catch (e: any) {
       popup.error(e?.response?.data?.error || 'A network error occurred. Please try again.');
     }
@@ -113,7 +114,7 @@ export const Register = () => {
               <LoadingButton
                   text={'Sign up'}
                   callbackFn={signUpAction}
-                  classes={['mt20']}
+                  className={'mt20'}
               />
             </div>
           </div>

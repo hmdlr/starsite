@@ -51,4 +51,28 @@
       height: 3rem;
     }
   }
+
+  @include smMaxBreakpoint {
+    display: none;
+  }
+}
+
+.navbar__user {
+  position: absolute;
+  right: 20px;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+
+  img {
+    height: 2.5rem;
+    @include smMinBreakpoint {
+      height: 3rem;
+    }
+  }
+
+  @include smMaxBreakpoint {
+    display: none;
+  }
 }

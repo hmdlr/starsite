@@ -1,7 +1,8 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import React from "react";
-import { StarClient } from "@hmdlr/types";
+import { AxiosClient } from "@hmdlr/types";
 import { useAuth } from "./useAuth";
+import { Scanphish } from "@hmdlr/utils";
 
 const defaultOptions: AxiosRequestConfig = {
   method: "GET",
@@ -12,13 +13,19 @@ const defaultOptions: AxiosRequestConfig = {
 };
 
 const clientContext = React.createContext<{
-  client: StarClient
+  client: AxiosClient;
+  sdk: {
+    scanphish: Scanphish;
+  }
 }>({
   client: {
     get: (url: string, options?: any) => axios.get(url, { ...defaultOptions, ...options }),
     post: (url: string, data: any, options?: any) => axios.post(url, data, { ...defaultOptions, ...options }),
     put: (url: string, data: any, options?: any) => axios.put(url, data, { ...defaultOptions, ...options }),
     delete: (url: string, options?: any) => axios.delete(url, { ...defaultOptions, ...options }),
+  },
+  sdk: {
+    scanphish: undefined!
   }
 });
 
@@ -29,16 +36,19 @@ export const ProvideClient = ({ children }: { children: any }) => {
 
 export const useClient = () => {
   return React.useContext(clientContext);
-}
+};
 
 function useProvideClient() {
   const { token } = useAuth();
+
+  // use axiosCall
   const get = (url: string, options?: any) => axios.get(url, { ...defaultOptions, ...options });
   const post = (url: string, data: any, options?: any) => axios.post(url, data, { ...defaultOptions, ...options });
   const put = (url: string, data: any, options?: any) => axios.put(url, data, { ...defaultOptions, ...options });
   const deleteRequest = (url: string, options?: any) => axios.delete(url, { ...defaultOptions, ...options });
 
   React.useEffect(() => {
+    // @ts-ignore
     axios.interceptors.request.use((config: AxiosRequestConfig) => {
       if (!config.headers) {
         // @ts-ignore
@@ -49,12 +59,22 @@ function useProvideClient() {
     });
   }, [token]);
 
+  const scanphish = new Scanphish({
+    get: (url: string, options?: any) => axios.get(url, { ...defaultOptions, ...options }).then((res: AxiosResponse) => res.data),
+    post: (url: string, data: any, options?: any) => axios.post(url, data, { ...defaultOptions, ...options }).then((res: AxiosResponse) => res.data),
+    put: (url: string, data: any, options?: any) => axios.put(url, data, { ...defaultOptions, ...options }).then((res: AxiosResponse) => res.data),
+    delete: (url: string, options?: any) => axios.delete(url, { ...defaultOptions, ...options }).then((res: AxiosResponse) => res.data),
+  });
+
   return {
     client: {
       get,
       post,
       put,
       delete: deleteRequest,
+    },
+    sdk: {
+      scanphish,
     }
-  }
+  };
 }

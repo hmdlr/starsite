@@ -1,0 +1,10 @@
+@import '../../../../sassStyles/_variables.scss';
+@import '../../../../sassStyles/_mixins.scss';
+
+.configs__container {
+  background-color: $ternaryColor;
+  width: 100%;
+  min-height: 20rem;
+  padding: 2rem;
+  border-radius: 0.7rem;
+}

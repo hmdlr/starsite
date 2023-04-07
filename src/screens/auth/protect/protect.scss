@@ -1,0 +1,26 @@
+@import '../../../sassStyles/_variables.scss';
+@import '../../../sassStyles/_mixins.scss';
+
+.protect__container {
+  padding: 4rem 3rem 3rem;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.protect__headline {
+  h2 {
+    color: $whiteTextColor;
+  }
+
+  flex-direction: column;
+
+  @include smMaxBreakpoint {
+    h2 {
+      font-size: 1.7rem;
+    }
+  }
+}
+
+.protect__headline__green {
+  color: $secondaryColor;
+}
