@@ -31,7 +31,7 @@ function useProvideAuth() {
 
   const signIn = async (username: string, password: string): Promise<AxiosResponse> => {
     const response = await axios.post<{ token: string }>(
-        `${env.api[Microservice.Authphish]}/auth`,
+        `${env.api[Microservice.Authphish]}/api/auth`,
         { username, password }
     );
     if (response.data.token) {
@@ -44,7 +44,7 @@ function useProvideAuth() {
 
   const signUp = async (username: string, name: string, password: string, email: string): Promise<AxiosResponse> => {
     return await axios.post<void>(
-        `${env.api[Microservice.Authphish]}/auth/signup`,
+        `${env.api[Microservice.Authphish]}/api/auth/signup`,
         { username, name, password, email }
     );
   }

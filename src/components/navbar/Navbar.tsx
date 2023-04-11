@@ -10,7 +10,7 @@ export const Navbar = () => {
         </div>
         <div className={'navbar__links'}>
           <a href={'#about'}>About</a>
-          <a href={'/protect'}>Protect</a>
+          <a href={'/configure'}>Configuration</a>
           <a href={'/auth'}>Login</a>
         </div>
         <div className={'navbar__user'}>

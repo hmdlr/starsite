@@ -3,5 +3,9 @@
     "first": "Take advantage of our prefedined ",
     "second": "rulesets",
     "third": " Tailored for your use!"
+  },
+  "premium_message_config_screen": {
+    "first": "Want to load more configurations at the same time?",
+    "second": "Check out our premium plans!"
   }
 }

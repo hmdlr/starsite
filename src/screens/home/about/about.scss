@@ -20,42 +20,6 @@
   }
 }
 
-.about__container_button {
-  appearance: none;
-  -webkit-box-align: center;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  position: relative;
-  white-space: nowrap;
-  vertical-align: middle;
-  outline: 2px solid $secondaryColor;
-  outline-offset: 2px;
-  width: auto;
-  line-height: 1.2;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-  transition-duration: 200ms;
-  height: 3rem;
-  min-width: 3rem;
-  font-size: 1.125rem;
-  padding-inline-start: 1.5rem;
-  padding-inline-end: 1.5rem;
-  border: none;
-  background: transparent;
-  color: $secondaryColor;
-  cursor: pointer;
-
-  @include smMaxBreakpoint {
-    margin-top: 2rem;
-  }
-}
-
-.about__container_button:hover {
-  background-color: rgba($secondaryColor, 0.12);
-}
-
 .about__container_image {
   img {
     max-width: 700px;

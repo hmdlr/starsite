@@ -1,8 +1,11 @@
 import './protect.scss'
-import strings from '../../../strings.json';
+import strings from '../../strings.json';
 import { ConfigsContainer } from "./configsContainer/ConfigsContainer";
+import { useNavigate } from "react-router-dom";
 
-export const Protect = () => {
+export const Configure = () => {
+  const navigate = useNavigate();
+
   return (
       <div className={'protect__container'}>
         <div className={'protect__headline'}>
@@ -17,6 +20,17 @@ export const Protect = () => {
           </h2>
         </div>
         <ConfigsContainer/>
+        <div className={'personalized__config__announce'}>
+          <h2>Or create your own, personalized configuration</h2>
+          <button
+              className={'green_neon_button'}
+              onClick={() => {
+                navigate('/configure/editor');
+              }}
+          >
+            Go to editor
+          </button>
+        </div>
       </div>
   );
 };

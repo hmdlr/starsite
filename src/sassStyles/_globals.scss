@@ -1,4 +1,5 @@
 @import './variables';
+@import './mixins';
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -8,6 +9,23 @@ body {
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background: #131212;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px #0d0421;
+  border-radius: 2px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #081f48;
+  border-radius: 4px;
 }
 
 #root {
@@ -116,6 +134,51 @@ input:-webkit-autofill:focus {
 
 .input-group input {
   background: transparent;
+}
+
+.green_neon_button {
+  appearance: none;
+  -webkit-box-align: center;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  outline: 2px solid $secondaryColor;
+  outline-offset: 2px;
+  width: auto;
+  line-height: 1.2;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  height: 3rem;
+  min-width: 3rem;
+  font-size: 1.125rem;
+  padding-inline-start: 1.5rem;
+  padding-inline-end: 1.5rem;
+  border: none;
+  background: transparent;
+  color: $secondaryColor;
+  cursor: pointer;
+
+  @include smMaxBreakpoint {
+    margin-top: 2rem;
+  }
+}
+
+.green_neon_button:hover {
+  background-color: rgba($secondaryColor, 0.12);
+}
+
+.green_neon_button_xl {
+  @extend .green_neon_button;
+  font-size: 1.5rem;
+  padding-inline-start: 2rem;
+  padding-inline-end: 2rem;
+  height: 4rem;
+  width: 10rem;
 }
 
 /* ==== */

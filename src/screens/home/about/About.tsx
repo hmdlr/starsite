@@ -24,7 +24,7 @@ export const About = () => {
           </div>
           <div className={'mt10'}>
             <button
-                className={'about__container_button'}
+                className={'green_neon_button'}
                 onClick={redirectToStore}
             >Download
             </button>

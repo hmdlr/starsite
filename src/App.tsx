@@ -11,7 +11,9 @@ import { Navbar } from "./components/navbar/Navbar";
 import { Register } from "./screens/auth/register";
 import { ProvidePopup } from "./hooks/popup/usePopup";
 import { ProvideStorage } from "./hooks/useStorage";
-import { Protect } from "./screens/auth/protect";
+import { Configure } from "./screens/protect";
+import { ProvideLoadGuard } from "./hooks/useLoadGuard";
+import { LoadGuardRouter } from "./screens/LoadGuardRouter";
 
 
 export const App = () => {
@@ -22,19 +24,11 @@ export const App = () => {
             <ProvideUrl>
               <ProvideAuth>
                 <ProvideClient>
-                  <GradientBody>
-                    <div style={{ zIndex: 2, width: '100%', flexDirection: 'column' }}>
-                      <Navbar/>
-                      <Router>
-                        <Routes>
-                          <Route path={"/"} element={<Home/>}/>
-                          <Route path={"/auth"} element={<Auth/>}/>
-                          <Route path={"/auth/register"} element={<Register/>}/>
-                          <Route path={"/protect"} element={<Protect/>}/>
-                        </Routes>
-                      </Router>
-                    </div>
-                  </GradientBody>
+                  <ProvideLoadGuard>
+                    <GradientBody>
+                      <LoadGuardRouter/>
+                    </GradientBody>
+                  </ProvideLoadGuard>
                 </ProvideClient>
               </ProvideAuth>
             </ProvideUrl>

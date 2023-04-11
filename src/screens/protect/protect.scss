@@ -1,5 +1,5 @@
-@import '../../../sassStyles/_variables.scss';
-@import '../../../sassStyles/_mixins.scss';
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
 
 .protect__container {
   padding: 4rem 3rem 3rem;
@@ -23,4 +23,17 @@
 
 .protect__headline__green {
   color: $secondaryColor;
+}
+
+.personalized__config__announce {
+  h2 {
+    color: $whiteTextColor;
+  }
+
+  button {
+    width: fit-content;
+  }
+
+  flex-direction: column;
+  gap: 1.2rem;
 }
