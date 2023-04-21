@@ -1,0 +1,25 @@
+@import '../../../sassStyles/variables';
+@import '../../../sassStyles/mixins';
+
+.ruleset {
+  background-color: $activeColor;
+
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  height: 3rem;
+  width: fit-content;
+
+  gap: 0.5rem;
+
+  img {
+    width: 2rem;
+    height: auto;
+  }
+
+  span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: $whiteTextColor;
+  }
+}

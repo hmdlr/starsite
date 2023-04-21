@@ -1,7 +1,7 @@
 import './configBox.scss';
 import { Img } from "../../../components/protectedImage/Img";
 import { ConfigModel } from "../../../models/ConfigModel";
-import { useConfigurations } from "../../../hooks/configurations/useConfigurations";
+import { ConfigLogoTitle } from "./ConfigLogoTitle";
 
 export const ConfigBox = (props: {
   config: ConfigModel,
@@ -19,10 +19,7 @@ export const ConfigBox = (props: {
                 changeActiveState(config);
               }}
           >
-            <div className={'configbox__title'}>
-              <Img src={config.logo} alt=""/>
-              <p>{config.name}</p>
-            </div>
+            <ConfigLogoTitle config={config}/>
           </div>
           {
               config.active &&

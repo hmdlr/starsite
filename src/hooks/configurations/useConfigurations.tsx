@@ -1,12 +1,18 @@
 import { ConfigModel } from "../../models/ConfigModel";
 import React, { useEffect } from "react";
 import { useClient } from "../useClient";
-import { IConfigCreatePayload } from "@hmdlr/types";
+import { IConfig, IConfigCreatePayload, UUID } from "@hmdlr/types";
+import env from "../../env";
+import { Microservice } from "@hmdlr/utils/dist/Microservice";
+import { IBrand } from "@hmdlr/types/dist/brands/IBrand";
 
 export const configurationsContext = React.createContext<{
   configs: ConfigModel[];
+  rulesets: IBrand[];
   handleChangeActiveState: (config: ConfigModel) => void;
-  createdConfig: Partial<IConfigCreatePayload>;
+  createdConfig: IConfig | undefined;
+  create: (config: IConfigCreatePayload) => Promise<void>;
+  loadRulesets: () => Promise<void>;
 }>(undefined!);
 
 export const ProvideConfigurations = ({ children }: { children: any }) => {
@@ -21,15 +27,22 @@ export const useConfigurations = () => {
 function useProvideConfigurations() {
   const { scanphish } = useClient().sdk;
 
+  const { client } = useClient();
+
   const [configs, setConfigs] = React.useState<ConfigModel[]>([]);
 
-  const [createdConfig, setCreatedConfig] = React.useState<Partial<IConfigCreatePayload>>({});
+  const [rulesets, setRulesets] = React.useState<IBrand[]>([]);
+
+  const [createdConfig, setCreatedConfig] = React.useState<IConfig | undefined>(undefined);
 
   useEffect(() => {
     Promise.all([
       scanphish.listConfigs({
-        pageSize: 50
-      }, true),
+            pageSize: 50
+          },
+          true,
+          true
+      ),
       scanphish.listPresets()
     ]).then(([configs, presets]) => {
           // active configs are the configs of which ids are in the presets
@@ -54,6 +67,14 @@ function useProvideConfigurations() {
     );
   }, []);
 
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const path = url.pathname.split("/").pop()!;
+    if(UUID.isValid(path) && !createdConfig) {
+      scanphish.getConfig(path).then(setCreatedConfig);
+    }
+  }, [])
+
   const handleChangeActiveState = (config: ConfigModel) => {
     const newConfigs = configs.map((c) => {
       if (c.id === config.id) {
@@ -74,10 +95,36 @@ function useProvideConfigurations() {
     }
   };
 
+  const create = async (config: IConfigCreatePayload) => {
+    const { config: createdConfig } = await createConfig(config);
+    setCreatedConfig(createdConfig);
+  };
+
+  const loadRulesets = async () => {
+    const { items } = await scanphish.listBrands({ pageSize: 50 });
+    setRulesets(items);
+  }
+
+  const createConfig = (config: IConfigCreatePayload): Promise<{ config: IConfig }> => {
+    const formData = new FormData();
+    formData.append('name', config.name);
+    if (config.logo) {
+      formData.append('logo', config.logo.buffer, 'logo');
+    }
+
+    return client.post<{ config: IConfig }>(
+        `${env.api[Microservice.Scanphish]}/api/config`,
+        formData
+    ).then((res) => res.data);
+  };
+
   return {
     configs,
+    rulesets,
     createdConfig,
-    handleChangeActiveState
+    handleChangeActiveState,
+    create,
+    loadRulesets
   };
 }
 

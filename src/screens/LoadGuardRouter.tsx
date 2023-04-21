@@ -4,10 +4,11 @@ import React from "react";
 import { Navbar } from "../components/navbar/Navbar";
 import { Auth } from "./auth/login";
 import { Register } from "./auth/register";
-import { Configure } from "./protect";
+import { Configure } from "./configuration";
 import { Home } from "./home";
 import { ProvideConfigurations } from "../hooks/configurations/useConfigurations";
-import { CreateCustomConfig } from "./customConfig/CreateCustomConfig";
+import { CreateCustomConfig } from "./editor/CreateCustomConfig";
+import { CustomConfigRulesets } from "./editor/CustomConfigRulesets";
 
 export const LoadGuardRouter = () => {
   const { cacheLoaded, LoadGuard } = useLoadGuard();
@@ -30,6 +31,7 @@ export const LoadGuardRouter = () => {
                     <Route path={"/auth/register"} element={<Register/>}/>
                     <Route path={"/configure"} element={<Configure/>}/>
                     <Route path={"/configure/editor"} element={<CreateCustomConfig/>}/>
+                    <Route path={"/configure/editor/rulesets/:configId"} element={<CustomConfigRulesets/>}/>
                   </Routes>
                 </Router>
               </ProvideConfigurations>

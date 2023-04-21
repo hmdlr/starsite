@@ -56,3 +56,15 @@
   gap: 0.5rem;
   align-items: center;
 }
+
+.config_logo_title_container {
+
+  background-color: $inactiveColor;
+
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  height: 4.2rem;
+  width: 14rem;
+  border-radius: 0.7rem;
+}

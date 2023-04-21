@@ -44,10 +44,12 @@
 }
 
 .custom__config__image_and_next {
+  position: relative;
   flex-direction: row;
+  width: 100%;
   gap: 2rem;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
 
   img {
     height: calc(85% - 6rem);
@@ -61,6 +63,51 @@
 }
 
 .custom__config__image_and_next__button {
-  width: 100%;
+  position: absolute;
+  right: 10rem;
+  justify-content: flex-end;
+
+  @include mdMaxBreakpoint {
+    position: relative;
+    right: 0;
+    justify-content: center;
+  }
+}
+
+
+.ruleset_select__config_title {
   justify-content: center;
+  width: 100%;
+}
+
+.ruleset_select {
+  flex-direction: column;
+  gap: 2rem;
+
+  padding-block: 3.2rem;
+}
+
+.ruleset_select__currently_selected {
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+
+  gap: 1rem;
+
+  span {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: $whiteTextColor;
+  }
+}
+
+.ruleset_select__dropbox {
+  width: 80%;
+  height: 25rem;
+  position: relative;
+  background-color: $ternaryColor;
+  border-radius: 0.7rem;
+  padding: 2.5rem;
+
+  gap: 1.5rem;
 }

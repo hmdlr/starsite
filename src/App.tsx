@@ -11,7 +11,7 @@ import { Navbar } from "./components/navbar/Navbar";
 import { Register } from "./screens/auth/register";
 import { ProvidePopup } from "./hooks/popup/usePopup";
 import { ProvideStorage } from "./hooks/useStorage";
-import { Configure } from "./screens/protect";
+import { Configure } from "./screens/configuration";
 import { ProvideLoadGuard } from "./hooks/useLoadGuard";
 import { LoadGuardRouter } from "./screens/LoadGuardRouter";
 
