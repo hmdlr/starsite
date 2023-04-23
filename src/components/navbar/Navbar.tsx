@@ -6,11 +6,17 @@ export const Navbar = () => {
   return (
       <div className={'navbar'}>
         <div className={'navbar__logo'}>
-          <img src={'/logo.png'} alt={'logo'}/>
+          <a href="/" className={'no-style'} style={{
+            textDecoration: 'none',
+            color: 'unset',
+          }}>
+            <img src={'/logo.png'} alt={'logo'}/>
+          </a>
         </div>
         <div className={'navbar__links'}>
           <a href={'/#about'}>About</a>
           <a href={'/configure'}>Configuration</a>
+          <a href={'/ruleset'}>Rulesets</a>
           <a href={'/auth'}>Login</a>
         </div>
         <div className={'navbar__user'}>

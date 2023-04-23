@@ -20,10 +20,13 @@ export const Configure = () => {
           </h2>
         </div>
         <ConfigsContainer/>
+        <span style={{
+          fontSize: '1.5rem',
+        }}>Check <a href="/configure/all">more configurations</a> and select whatever suits you best</span>
         <div className={'personalized__config__announce'}>
           <h2>Or create your own, personalized configuration</h2>
           <button
-              className={'green_neon_button'}
+              className={'white_formal_button small'}
               onClick={() => {
                 navigate('/configure/editor');
               }}

@@ -123,12 +123,12 @@ div {
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
+  -webkit-box-shadow: 0 0 0 50px white inset; /* Change the color to your own background color */
   -webkit-text-fill-color: #333;
 }
 
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 50px white inset;/*your box-shadow*/
+  -webkit-box-shadow: 0 0 0 50px white inset; /*your box-shadow*/
   -webkit-text-fill-color: #333;
 }
 
@@ -217,5 +217,15 @@ input:-webkit-autofill:focus {
     width: 10rem;
     height: 3rem;
     font-size: 1rem;
+  }
+}
+
+.no-style {
+  all: unset;
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparent;
+    border-radius: 0;
   }
 }

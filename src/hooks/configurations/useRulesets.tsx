@@ -107,11 +107,11 @@ function useProvideRulesets() {
   }, [currentEditConfig]);
 
   const markRulesetActive = (ruleset: IBrand) => {
-    if (activeRulesets.map((r) => r.id).includes(ruleset.id)) {
+    if (activeRulesets?.map((r) => r.id).includes(ruleset.id)) {
       return;
     }
     setSelectableRulesets(selectableRulesets.filter((r) => r.id !== ruleset.id));
-    setActiveRulesets([...activeRulesets, ruleset]);
+    setActiveRulesets([...(activeRulesets ? activeRulesets : []), ruleset]);
   };
 
   const markRulesetInactive = (ruleset: IBrand) => {
@@ -172,22 +172,9 @@ function useProvideRulesets() {
   };
 
   const enhanceUploadLogo = async (rulesetId: string, logo: string): Promise<void> => {
-    const formData = new FormData();
-
-    // download the logo
-    const response = await fetch(logo);
-    const blob = await response.blob();
-    formData.append("logo", blob);
-
-    await client.put(
-        `${env.api[Microservice.Scanphish]}/api/brand/${rulesetId}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          }
-        }
-    );
+    await scanphish.updateBrand(rulesetId, {
+      logo,
+    });
   };
 
   return {

@@ -33,6 +33,7 @@ export const LoadGuardRouter = () => {
                       <Route path={"/auth"} element={<Auth/>}/>
                       <Route path={"/auth/register"} element={<Register/>}/>
                       <Route path={"/configure"} element={<Configure/>}/>
+                      <Route path={"/ruleset"} element={<Configure/>}/>
                       <Route path={"/configure/editor"} element={<CreateCustomConfig/>}/>
                       <Route path={"/configure/editor/rulesets/:configId"} element={<CustomConfigRulesets/>}/>
                       <Route path={"/ruleset/create"} element={<CreateRuleset/>}/>
