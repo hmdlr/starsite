@@ -1,22 +1,29 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import './loadingButton.scss';
 
 export const LoadingButton = ({
                                 text,
                                 callbackFn,
+                                immediatelyDo,
                                 className,
+                                disabled,
                                 ...props
                               }: {
   text: string,
   callbackFn: Function,
+  immediatelyDo?: Function,
   className?: string,
-  props?: any
+  disabled?: boolean,
+  props?: React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 }) => {
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!loading) return;
+    if (immediatelyDo) {
+      immediatelyDo();
+    }
     setTimeout(() => {
       setLoading(false);
       callbackFn();
@@ -27,6 +34,7 @@ export const LoadingButton = ({
       <button
           type={'submit'}
           className={'loading-button ' + (className || '')}
+          disabled={disabled}
           onClick={() => {
             setLoading(true);
           }}

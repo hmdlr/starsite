@@ -9,6 +9,8 @@ import { Home } from "./home";
 import { ProvideConfigurations } from "../hooks/configurations/useConfigurations";
 import { CreateCustomConfig } from "./editor/CreateCustomConfig";
 import { CustomConfigRulesets } from "./editor/CustomConfigRulesets";
+import { ProvideRulesets } from "../hooks/configurations/useRulesets";
+import { CreateRuleset } from "./editor/ruleset/CreateRuleset";
 
 export const LoadGuardRouter = () => {
   const { cacheLoaded, LoadGuard } = useLoadGuard();
@@ -24,16 +26,19 @@ export const LoadGuardRouter = () => {
             <>
               {/*<AuthGuard/>*/}
               <ProvideConfigurations>
-                <Router>
-                  <Routes>
-                    <Route path={"/"} element={<Home/>}/>
-                    <Route path={"/auth"} element={<Auth/>}/>
-                    <Route path={"/auth/register"} element={<Register/>}/>
-                    <Route path={"/configure"} element={<Configure/>}/>
-                    <Route path={"/configure/editor"} element={<CreateCustomConfig/>}/>
-                    <Route path={"/configure/editor/rulesets/:configId"} element={<CustomConfigRulesets/>}/>
-                  </Routes>
-                </Router>
+                <ProvideRulesets>
+                  <Router>
+                    <Routes>
+                      <Route path={"/"} element={<Home/>}/>
+                      <Route path={"/auth"} element={<Auth/>}/>
+                      <Route path={"/auth/register"} element={<Register/>}/>
+                      <Route path={"/configure"} element={<Configure/>}/>
+                      <Route path={"/configure/editor"} element={<CreateCustomConfig/>}/>
+                      <Route path={"/configure/editor/rulesets/:configId"} element={<CustomConfigRulesets/>}/>
+                      <Route path={"/ruleset/create"} element={<CreateRuleset/>}/>
+                    </Routes>
+                  </Router>
+                </ProvideRulesets>
               </ProvideConfigurations>
             </>
         )}

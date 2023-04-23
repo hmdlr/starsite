@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const CreateCustomConfig = () => {
-  const { create, createdConfig } = useConfigurations();
+  const { create, currentEditConfig } = useConfigurations();
 
   const navigate = useNavigate();
 
@@ -24,11 +24,11 @@ export const CreateCustomConfig = () => {
   };
 
   useEffect(() => {
-    if (!createdConfig?.id) {
+    if (!currentEditConfig?.id) {
       return;
     }
-    navigate(`/configure/editor/rulesets/${createdConfig?.id}`);
-  }, [createdConfig]);
+    navigate(`/configure/editor/rulesets/${currentEditConfig?.id}`);
+  }, [currentEditConfig]);
 
   return (
       <div className={'custom__config'}>

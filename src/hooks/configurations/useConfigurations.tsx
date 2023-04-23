@@ -8,11 +8,9 @@ import { IBrand } from "@hmdlr/types/dist/brands/IBrand";
 
 export const configurationsContext = React.createContext<{
   configs: ConfigModel[];
-  rulesets: IBrand[];
   handleChangeActiveState: (config: ConfigModel) => void;
-  createdConfig: IConfig | undefined;
+  currentEditConfig: IConfig | undefined;
   create: (config: IConfigCreatePayload) => Promise<void>;
-  loadRulesets: () => Promise<void>;
 }>(undefined!);
 
 export const ProvideConfigurations = ({ children }: { children: any }) => {
@@ -33,7 +31,7 @@ function useProvideConfigurations() {
 
   const [rulesets, setRulesets] = React.useState<IBrand[]>([]);
 
-  const [createdConfig, setCreatedConfig] = React.useState<IConfig | undefined>(undefined);
+  const [currentEditConfig, setCurrentEditConfig] = React.useState<IConfig | undefined>(undefined);
 
   useEffect(() => {
     Promise.all([
@@ -70,8 +68,8 @@ function useProvideConfigurations() {
   useEffect(() => {
     const url = new URL(window.location.href);
     const path = url.pathname.split("/").pop()!;
-    if(UUID.isValid(path) && !createdConfig) {
-      scanphish.getConfig(path).then(setCreatedConfig);
+    if(UUID.isValid(path) && !currentEditConfig) {
+      scanphish.getConfig(path).then(setCurrentEditConfig);
     }
   }, [])
 
@@ -97,13 +95,8 @@ function useProvideConfigurations() {
 
   const create = async (config: IConfigCreatePayload) => {
     const { config: createdConfig } = await createConfig(config);
-    setCreatedConfig(createdConfig);
+    setCurrentEditConfig(createdConfig);
   };
-
-  const loadRulesets = async () => {
-    const { items } = await scanphish.listBrands({ pageSize: 50 });
-    setRulesets(items);
-  }
 
   const createConfig = (config: IConfigCreatePayload): Promise<{ config: IConfig }> => {
     const formData = new FormData();
@@ -121,10 +114,9 @@ function useProvideConfigurations() {
   return {
     configs,
     rulesets,
-    createdConfig,
+    currentEditConfig,
     handleChangeActiveState,
     create,
-    loadRulesets
   };
 }
 

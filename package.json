@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@hmdlr/types": "^2.2.53",
-    "@hmdlr/utils": "^0.1.110",
+    "@hmdlr/types": "^2.2.54",
+    "@hmdlr/utils": "^0.1.113",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
@@ -15,6 +15,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^3.11.0",
+    "react-loading": "^2.0.3",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
     "sass": "^1.58.3",

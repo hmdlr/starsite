@@ -52,7 +52,7 @@
   justify-content: center;
 
   img {
-    height: calc(85% - 6rem);
+    height: calc(55vh - 6rem);
   }
 
   @include smMaxBreakpoint {
@@ -98,7 +98,29 @@
     font-size: 1.8rem;
     font-weight: 600;
     color: $whiteTextColor;
+    @include smMaxBreakpoint {
+      font-size: 1.4rem;
+    }
   }
+}
+
+.drag-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: $whiteTextColor;
+
+  // non-clickable
+  pointer-events: none;
 }
 
 .ruleset_select__dropbox {
@@ -108,6 +130,153 @@
   background-color: $ternaryColor;
   border-radius: 0.7rem;
   padding: 2.5rem;
+  flex-direction: column;
+  justify-content: space-between;
 
-  gap: 1.5rem;
+  .ruleset_select__dropbox_active_rulesets {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    @include smMaxBreakpoint {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  .active_ruleset_deletable {
+    align-items: center;
+  }
+
+  .active_ruleset_deletable__delete {
+    img {
+      width: 1.8rem;
+      height: auto;
+      cursor: pointer;
+    }
+  }
+
+  .ruleset_select__dropbox_footer {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    @include smMaxBreakpoint {
+      flex-direction: column-reverse;
+    }
+  }
+
+  .ruleset_select__dropbox_promo {
+    flex-direction: column;
+    width: fit-content;
+
+    span {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $grayTextColor;
+
+      @include smMaxBreakpoint {
+        font-size: 1.2rem;
+      }
+    }
+
+    @include smMaxBreakpoint {
+      display: none;
+    }
+  }
+
+  @include smMaxBreakpoint {
+    width: 100%;
+    height: 40rem;
+  }
+
+}
+
+.ruleset_select__choose_rulesets {
+  width: 80%;
+  padding: 3rem;
+  @include smMaxBreakpoint {
+    width: 100%;
+    padding: 0;
+    padding-inline: 1rem;
+  }
+
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  background-color: $ternaryColor;
+  border-radius: 0.7rem;
+
+  span {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $whiteTextColor;
+    @include smMaxBreakpoint {
+      font-size: 1.4rem;
+    }
+  }
+
+  .ruleset_select__selectable_rulesets_create_msg {
+    color: $grayTextColor;
+  }
+}
+
+.ruleset_select__search_rulesets {
+  width: 40rem;
+  flex-direction: row;
+
+  justify-content: center;
+
+  gap: 2rem;
+
+  input {
+    width: 25rem;
+    height: 4.2rem;
+    background-color: transparent;
+
+    border: 1.6px solid $whiteTextColor;
+    font-size: 1.2rem;
+
+    border-radius: 0.7rem;
+  }
+
+
+  @include smMaxBreakpoint {
+    width: 100%;
+    padding: 0 1rem;
+
+    flex-direction: column;
+
+    input {
+      width: 100%;
+    }
+  }
+}
+
+.ruleset_select__selectable_rulesets {
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  @include smMaxBreakpoint {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.dragging {
+  pointer-events: none;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.invisible {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.visible {
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }

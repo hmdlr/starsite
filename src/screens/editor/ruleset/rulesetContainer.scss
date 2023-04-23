@@ -2,11 +2,12 @@
 @import '../../../sassStyles/mixins';
 
 .ruleset {
-  background-color: $activeColor;
+  background-color: $primaryColor;
 
   justify-content: center;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.8rem;
+  padding-inline: 1.6rem;
   height: 3rem;
   width: fit-content;
 
