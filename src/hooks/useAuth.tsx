@@ -6,12 +6,41 @@ import { Microservice } from "@hmdlr/utils/dist/Microservice";
 import { useStorage } from "./useStorage";
 
 const authContext = React.createContext<{
+  /**
+   * The username of the currently logged in user
+   */
   username: string | undefined;
+  /**
+   * The JWT token of the currently logged in user
+   */
   token: string | undefined;
+  /**
+   * Sign in the user
+   * @param username
+   * @param password
+   */
   signIn: (username: string, password: string) => Promise<AxiosResponse>;
+  /**
+   * Sign up a new user
+   * @param username
+   * @param name
+   * @param password
+   * @param email
+   */
   signUp: (username: string, name: string, password: string, email: string) => Promise<AxiosResponse>;
+  /**
+   * Sign out the user
+   */
   signOut: () => void;
+  /**
+   * Send the extension token to the backend
+   * @param extToken
+   */
   sendExtToken: (extToken: string) => Promise<any | undefined>;
+  /**
+   * Get the id of the currently logged in user
+   */
+  getId(): string | undefined;
 }>(undefined!);
 
 export const ProvideAuth = ({ children }: { children: any }) => {
@@ -47,7 +76,7 @@ function useProvideAuth() {
         `${env.api[Microservice.Authphish]}/api/auth/signup`,
         { username, name, password, email }
     );
-  }
+  };
 
   /* On page startup */
   useEffect(() => {
@@ -65,8 +94,8 @@ function useProvideAuth() {
   const sendExtToken = useCallback(
       async (extToken: string): Promise<any | undefined> => {
         if (!token) return;
-        return await fetch(
-            `${env.api[Microservice.Authphish]}/auth/ext-token`,
+        return fetch(
+            `${env.api[Microservice.Authphish]}/api/auth/ext-token`,
             {
               method: "PUT",
               headers: {
@@ -79,6 +108,12 @@ function useProvideAuth() {
       }
       , [token]);
 
+  const getId = useCallback((): string | undefined => {
+    if (!token) return;
+    return getParsedJwt<{ id: string }>(token)?.id;
+
+  }, [token]);
+
   return {
     username,
     token,
@@ -86,5 +121,6 @@ function useProvideAuth() {
     signUp,
     signOut,
     sendExtToken,
+    getId
   };
 }

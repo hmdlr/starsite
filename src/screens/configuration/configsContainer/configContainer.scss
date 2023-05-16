@@ -1,6 +1,27 @@
 @import '../../../sassStyles/variables';
 @import '../../../sassStyles/mixins';
 
+.config_overview {
+  flex-direction: column;
+
+  padding-inline: 4rem;
+}
+
+.config_overview__header_text {
+  margin-bottom: 2rem;
+  padding-inline: 0.5rem;
+
+  @include smMaxBreakpoint {
+    padding-inline: 0;
+  }
+
+  span {
+    color: $whiteTextColor;
+    font-size: 2.4rem;
+    font-weight: 600;
+  }
+}
+
 .configs__container {
   background-color: $ternaryColor;
   width: 100%;
@@ -13,7 +34,9 @@
 
 .configs__container__configboxes {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
 }
 

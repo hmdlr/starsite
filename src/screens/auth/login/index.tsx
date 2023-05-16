@@ -1,15 +1,15 @@
 import '../auth.scss';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUrl } from "../../../hooks/useUrl";
 import { useAuth } from "../../../hooks/useAuth";
 import { LoadingButton } from "../../../components/loadingButton/LoadingButton";
 import { usePopup } from "../../../hooks/popup/usePopup";
 
 export const Auth = () => {
-  const { parameters } = useUrl();
   const { popup } = usePopup();
   const { signIn, sendExtToken } = useAuth();
+
+  const parameters = new URLSearchParams(window.location.search);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,13 +23,13 @@ export const Auth = () => {
     try {
       const response = await signIn(username, password);
       if (response.status === 200) {
-        if (parameters['ext-token']) {
-          await sendExtToken(parameters['ext-token']);
+        if (parameters.get('ext-token')) {
+          sendExtToken(parameters.get('ext-token') || '');
         }
       } else {
         return popup.error('Invalid username or password.');
       }
-      navigate(parameters.redirect || "/");
+      navigate(parameters.get('redirect') || "/", { replace: true });
     } catch (e: any) {
       popup.error(e?.response?.data?.error || 'A network error occurred. Please try again.');
     }

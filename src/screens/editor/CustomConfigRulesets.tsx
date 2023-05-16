@@ -110,7 +110,7 @@ export const CustomConfigRulesets = () => {
                   className={'did-floating-input'}
                   placeholder={'Bank of America'}
               />
-              <LoadingButton className={'white_formal_button'} text={'Search'} callbackFn={() => {
+              <LoadingButton className={'white_formal_button small'} text={'Search'} callbackFn={() => {
               }}/>
             </div>
             <span>Drag and drop rulesets into the configuration box</span>

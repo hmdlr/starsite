@@ -22,7 +22,7 @@ export const Configure = () => {
         <ConfigsContainer/>
         <span style={{
           fontSize: '1.5rem',
-        }}>Check <a href="/configure/all">more configurations</a> and select whatever suits you best</span>
+        }}>Check <a href="/configure/overview">more configurations</a> and select whatever suits you best</span>
         <div className={'personalized__config__announce'}>
           <h2>Or create your own, personalized configuration</h2>
           <button

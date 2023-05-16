@@ -11,6 +11,7 @@ import { CreateCustomConfig } from "./editor/CreateCustomConfig";
 import { CustomConfigRulesets } from "./editor/CustomConfigRulesets";
 import { ProvideRulesets } from "../hooks/configurations/useRulesets";
 import { CreateRuleset } from "./editor/ruleset/CreateRuleset";
+import { ConfigOverview } from "./configuration/ConfigOverview";
 
 export const LoadGuardRouter = () => {
   const { cacheLoaded, LoadGuard } = useLoadGuard();
@@ -35,6 +36,7 @@ export const LoadGuardRouter = () => {
                       <Route path={"/configure"} element={<Configure/>}/>
                       <Route path={"/ruleset"} element={<Configure/>}/>
                       <Route path={"/configure/editor"} element={<CreateCustomConfig/>}/>
+                      <Route path={"/configure/overview"} element={<ConfigOverview/>}/>
                       <Route path={"/configure/editor/rulesets/:configId"} element={<CustomConfigRulesets/>}/>
                       <Route path={"/ruleset/create"} element={<CreateRuleset/>}/>
                     </Routes>

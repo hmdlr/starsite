@@ -22,7 +22,11 @@ export const RulesetContainer = (props: {
           cursor: props.draggable ? 'grab' : 'default'
         }}
     >
-      <Img src={ruleset?.logo} alt=""/>
+      <Img
+          className={'ruleset_logo'}
+          src={ruleset?.logo}
+          alt=""
+      />
       <span>{ruleset?.name}</span>
     </div>
   );
