@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@hmdlr/types": "^2.2.55",
-    "@hmdlr/utils": "^0.1.114",
+    "@hmdlr/utils": "^0.1.124",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
@@ -45,8 +45,8 @@
     "zlib": "npm:browserify-zlib@^0.2.0"
   },
   "scripts": {
-    "start": "REACT_APP_AUTHPHISH_PORT=$AUTHPHISH_PORT REACT_APP_SCANPHISH_PORT=$SCANPHISH_PORT craco start",
-    "build": "react-scripts build",
+    "start": "REACT_APP_LOCAL_STARCONFIG_PORT=$LOCAL_STARCONFIG_PORT REACT_APP_AUTHPHISH_PORT=$AUTHPHISH_PORT REACT_APP_SCANPHISH_PORT=$SCANPHISH_PORT craco start",
+    "build": "NODE_ENV=production craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

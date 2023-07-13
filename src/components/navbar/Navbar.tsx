@@ -1,5 +1,6 @@
 import './navbar.scss';
 import { useAuth } from "../../hooks/useAuth";
+import env from "../../env";
 
 export const Navbar = () => {
   const { username } = useAuth();
@@ -15,13 +16,14 @@ export const Navbar = () => {
         </div>
         <div className={'navbar__links'}>
           <a href={'/#about'}>About</a>
-          <a href={'/configure'}>Configuration</a>
-          <a href={'/ruleset'}>Rulesets</a>
+          <a href={
+            env.nodeEnv === 'development' ? `http://localhost:${env.localStarconfigPort}` : 'https://workspace.starphish.app'
+          }>Configuration</a>
           <a href={'/auth'}>Login</a>
         </div>
         <div className={'navbar__user'}>
           <span>
-            @{username}
+            {username ? '@' : ''}{username}
           </span>
         </div>
       </div>

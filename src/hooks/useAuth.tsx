@@ -61,7 +61,8 @@ function useProvideAuth() {
   const signIn = async (username: string, password: string): Promise<AxiosResponse> => {
     const response = await axios.post<{ token: string }>(
         `${env.api[Microservice.Authphish]}/api/auth`,
-        { username, password }
+        { username, password },
+        { withCredentials: true }
     );
     if (response.data.token) {
       setToken(response.data.token);

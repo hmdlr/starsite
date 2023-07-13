@@ -16,5 +16,7 @@ export default {
   },
   commPort: 'starph1sh',
   tokenLocation: 'starphish-token',
-  chromeStoreUrl: 'https://chrome.google.com/webstore/detail/heimdallr/mgcclljnboinjppelonolbhklnnljonp'
+  chromeStoreUrl: 'https://chrome.google.com/webstore/detail/heimdallr/mgcclljnboinjppelonolbhklnnljonp',
+  localStarconfigPort: process.env.REACT_APP_LOCAL_STARCONFIG_PORT,
+  nodeEnv: process.env.NODE_ENV,
 };

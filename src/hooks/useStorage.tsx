@@ -30,6 +30,8 @@ function useProvideStorage() {
     const token = getStoredToken();
     if (token) {
       setToken(token);
+    } else {
+      setToken('');
     }
   }, []);
 
