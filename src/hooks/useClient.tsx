@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from "react";
 import { AxiosClient } from "@hmdlr/types";
 import { Scanphish } from "@hmdlr/utils";
 import env from "../env";
-import { Microservice } from "@hmdlr/utils/dist/Microservice";
+import { DeployedPaths, Microservice } from "@hmdlr/utils/dist/Microservice";
 import { useStorage } from "./useStorage";
 
 const defaultOptions: AxiosRequestConfig = {
@@ -43,7 +43,7 @@ export const useClient = () => {
 function useProvideClient() {
   const { token } = useStorage();
   const scanphishAxios = axios.create({
-    baseURL: env.api[Microservice.Scanphish]
+    baseURL: DeployedPaths[Microservice.Scanphish]
   })
 
   // use axiosCall

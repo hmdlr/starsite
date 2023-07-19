@@ -1,6 +1,7 @@
 import './navbar.scss';
 import { useAuth } from "../../hooks/useAuth";
 import env from "../../env";
+import { DeployedPaths, FrontPaths } from "@hmdlr/utils/dist/Microservice";
 
 export const Navbar = () => {
   const { username } = useAuth();
@@ -17,7 +18,7 @@ export const Navbar = () => {
         <div className={'navbar__links'}>
           <a href={'/#about'}>About</a>
           <a href={
-            env.nodeEnv === 'development' ? `http://localhost:${env.localStarconfigPort}` : 'https://workspace.starphish.app'
+            FrontPaths["workspace"]
           }>Configuration</a>
           <a href={'/auth'}>Login</a>
         </div>

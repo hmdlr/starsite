@@ -1,8 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import React, { useCallback, useEffect } from "react";
 import { getParsedJwt } from "../utils/utils";
-import env from "../env";
-import { Microservice } from "@hmdlr/utils/dist/Microservice";
+import { DeployedPaths, Microservice } from "@hmdlr/utils/dist/Microservice";
 import { useStorage } from "./useStorage";
 
 const authContext = React.createContext<{
@@ -60,7 +59,7 @@ function useProvideAuth() {
 
   const signIn = async (username: string, password: string): Promise<AxiosResponse> => {
     const response = await axios.post<{ token: string }>(
-        `${env.api[Microservice.Authphish]}/api/auth`,
+        `${DeployedPaths[Microservice.Authphish]}/api/auth`,
         { username, password },
         { withCredentials: true }
     );
@@ -74,7 +73,7 @@ function useProvideAuth() {
 
   const signUp = async (username: string, name: string, password: string, email: string): Promise<AxiosResponse> => {
     return await axios.post<void>(
-        `${env.api[Microservice.Authphish]}/api/auth/signup`,
+        `${DeployedPaths[Microservice.Authphish]}/api/auth/signup`,
         { username, name, password, email }
     );
   };
@@ -96,7 +95,7 @@ function useProvideAuth() {
       async (extToken: string): Promise<any | undefined> => {
         if (!token) return;
         return fetch(
-            `${env.api[Microservice.Authphish]}/api/auth/ext-token`,
+            `${DeployedPaths[Microservice.Authphish]}/api/auth/ext-token`,
             {
               method: "PUT",
               headers: {

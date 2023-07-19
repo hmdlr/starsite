@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useClient } from "../useClient";
 import { IConfig, IConfigCreatePayload, UUID } from "@hmdlr/types";
 import env from "../../env";
-import { Microservice } from "@hmdlr/utils/dist/Microservice";
+import { DeployedPaths, Microservice } from "@hmdlr/utils/dist/Microservice";
 import { IBrand } from "@hmdlr/types/dist/brands/IBrand";
 
 export const configurationsContext = React.createContext<{
@@ -135,7 +135,7 @@ function useProvideConfigurations() {
     }
 
     return client.post<{ config: IConfig }>(
-        `${env.api[Microservice.Scanphish]}/api/config`,
+        `${DeployedPaths[Microservice.Scanphish]}/api/config`,
         formData
     ).then((res) => res.data);
   };
