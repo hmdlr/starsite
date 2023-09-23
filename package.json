@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@hmdlr/types": "^2.2.68",
-    "@hmdlr/utils": "^0.1.128",
+    "@hmdlr/utils": "^0.1.129",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
