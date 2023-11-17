@@ -18,24 +18,23 @@ import { LoadGuardRouter } from "./screens/LoadGuardRouter";
 
 export const App = () => {
   return (
-      <div style={{ display: 'flex', height: '100vh', width: '100%', overflowX: 'hidden' }}>
-        <ProvideStorage>
-          <ProvidePopup>
-            <ProvideUrl>
-              <ProvideAuth>
-                <ProvideClient>
-                  <ProvideLoadGuard>
-                    <GradientBody>
-                      <LoadGuardRouter/>
-                    </GradientBody>
-                  </ProvideLoadGuard>
-                </ProvideClient>
-              </ProvideAuth>
-            </ProvideUrl>
-          </ProvidePopup>
-        </ProvideStorage>
-        <Bubbles/>
-      </div>
+    <div style={{display: 'flex', height: '100vh', width: '100%', overflowX: 'hidden'}}>
+      <ProvideStorage>
+        <ProvidePopup>
+          <ProvideUrl>
+            <ProvideAuth>
+              <ProvideClient>
+                <ProvideLoadGuard>
+                  <GradientBody>
+                    <LoadGuardRouter/>
+                  </GradientBody>
+                </ProvideLoadGuard>
+              </ProvideClient>
+            </ProvideAuth>
+          </ProvideUrl>
+        </ProvidePopup>
+      </ProvideStorage>
+      <Bubbles/>
+    </div>
   )
-      ;
 };
