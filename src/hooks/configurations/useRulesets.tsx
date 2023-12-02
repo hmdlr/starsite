@@ -99,11 +99,11 @@ function useProvideRulesets() {
   };
 
   useEffect(() => {
-    if (!currentEditConfig) {
-      return;
-    }
-    setActiveRulesets(currentEditConfig.brands);
-    loadRulesets();
+    // if (!currentEditConfig) {
+    //   return;
+    // }
+    // setActiveRulesets(currentEditConfig.brands);
+    // loadRulesets();
   }, [currentEditConfig]);
 
   const markRulesetActive = (ruleset: IBrand) => {

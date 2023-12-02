@@ -24,8 +24,7 @@ export const Auth = () => {
       const response = await signIn(username, password);
       if (response.status === 200) {
         if (parameters.get('ext-token')) {
-          sendExtToken(parameters.get('ext-token') || '').then(() => {
-          })
+          await sendExtToken(parameters.get('ext-token') || '')
         }
       } else {
         return popup.error('Invalid username or password.');

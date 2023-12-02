@@ -94,17 +94,14 @@ function useProvideAuth() {
   const sendExtToken = useCallback(
       async (extToken: string): Promise<any | undefined> => {
         if (!token) return;
-        return fetch(
-            `${DeployedPaths[Microservice.Authphish]}/api/auth/ext-token`,
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-              },
-              body: JSON.stringify({ halfToken: extToken })
-            }
-        );
+         const res = await axios.put(
+           `${DeployedPaths[Microservice.Authphish]}/api/auth/ext-token`,
+           {halfToken: extToken},
+           {withCredentials: true}
+         );
+
+         debugger;
+         console.log(res);
       }
       , [token]);
 

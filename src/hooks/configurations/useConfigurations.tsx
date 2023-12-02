@@ -60,46 +60,46 @@ function useProvideConfigurations() {
   const [currentEditConfig, setCurrentEditConfig] = React.useState<IConfig | undefined>(undefined);
 
   useEffect(() => {
-    const url = new URL(window.location.href);
-    const path = url.pathname.split("/").pop()!;
-    if (UUID.isValid(path) && !currentEditConfig) {
-      scanphish.getConfig(path).then(setCurrentEditConfig);
-    }
-
-    scanphish.listPresets().then((presets) => {
-      console.log(presets);
-      setPresets(presets);
-    });
+    // const url = new URL(window.location.href);
+    // const path = url.pathname.split("/").pop()!;
+    // if (UUID.isValid(path) && !currentEditConfig) {
+    //   scanphish.getConfig(path).then(setCurrentEditConfig);
+    // }
+    //
+    // scanphish.listPresets().then((presets) => {
+    //   console.log(presets);
+    //   setPresets(presets);
+    // });
   }, []);
 
   useEffect(() => {
-    if (presets.length === 0) {
-      return;
-    }
-    scanphish.listConfigs({
-          pageSize: 50
-        },
-        true,
-        true
-    ).then((configs) => {
-          // active configs are the configs of which ids are in the presets
-          const activeConfigsIds = presets.map((preset) => preset.id);
-          const configModels = configs.items
-              .filter((config) => activeConfigsIds.includes(config.id))
-              .map((config): ConfigModel => ({
-                ...config,
-                active: true
-              }));
-          configModels.push(...configs.items
-              .filter((config) => !activeConfigsIds.includes(config.id))
-              .map((config): ConfigModel => ({
-                ...config,
-                active: false
-              }))
-          );
-          setPublicOnlyConfigs(configModels);
-        }
-    );
+    // if (presets.length === 0) {
+    //   return;
+    // }
+    // scanphish.listConfigs({
+    //       pageSize: 50
+    //     },
+    //     true,
+    //     true
+    // ).then((configs) => {
+    //       // active configs are the configs of which ids are in the presets
+    //       const activeConfigsIds = presets.map((preset) => preset.id);
+    //       const configModels = configs.items
+    //           .filter((config) => activeConfigsIds.includes(config.id))
+    //           .map((config): ConfigModel => ({
+    //             ...config,
+    //             active: true
+    //           }));
+    //       configModels.push(...configs.items
+    //           .filter((config) => !activeConfigsIds.includes(config.id))
+    //           .map((config): ConfigModel => ({
+    //             ...config,
+    //             active: false
+    //           }))
+    //       );
+    //       setPublicOnlyConfigs(configModels);
+    //     }
+    // );
   }, [presets]);
 
   const handleChangeActiveState = (config: ConfigModel) => {
