@@ -26,7 +26,12 @@ const authContext = React.createContext<{
    * @param password
    * @param email
    */
-  signUp: (username: string, name: string, password: string, email: string) => Promise<AxiosResponse>;
+  signUp: (
+    username: string,
+    name: string,
+    password: string,
+    email: string,
+  ) => Promise<AxiosResponse>;
   /**
    * Sign out the user
    */
@@ -56,25 +61,34 @@ function useProvideAuth() {
   const [token, setToken] = React.useState<string>();
   const { storeToken, getStoredToken } = useStorage();
 
-
-  const signIn = async (username: string, password: string): Promise<AxiosResponse> => {
+  const signIn = async (
+    username: string,
+    password: string,
+  ): Promise<AxiosResponse> => {
     const response = await axios.post<{ token: string }>(
-        `${DeployedPaths[Microservice.Authphish]}/api/auth`,
-        { username, password },
-        { withCredentials: true }
+      `${DeployedPaths[Microservice.Authphish]}/api/auth`,
+      { username, password },
+      { withCredentials: true },
     );
     if (response.data.token) {
       setToken(response.data.token);
       storeToken(response.data.token);
-      setUsername(getParsedJwt<{ username: string }>(response.data.token)?.username);
+      setUsername(
+        getParsedJwt<{ username: string }>(response.data.token)?.username,
+      );
     }
     return response;
   };
 
-  const signUp = async (username: string, name: string, password: string, email: string): Promise<AxiosResponse> => {
+  const signUp = async (
+    username: string,
+    name: string,
+    password: string,
+    email: string,
+  ): Promise<AxiosResponse> => {
     return await axios.post<void>(
-        `${DeployedPaths[Microservice.Authphish]}/api/auth/signup`,
-        { username, name, password, email }
+      `${DeployedPaths[Microservice.Authphish]}/api/auth/signup`,
+      { username, name, password, email },
     );
   };
 
@@ -91,24 +105,18 @@ function useProvideAuth() {
     setUsername(undefined);
   };
 
-  const sendExtToken = useCallback(
-      async (extToken: string): Promise<any | undefined> => {
-        if (!token) return;
-         const res = await axios.put(
-           `${DeployedPaths[Microservice.Authphish]}/api/auth/ext-token`,
-           {halfToken: extToken},
-           {withCredentials: true}
-         );
-
-         debugger;
-         console.log(res);
-      }
-      , [token]);
+  const sendExtToken = async (extToken: string): Promise<any | undefined> => {
+    if (!token && !getCookieId()) return;
+    await axios.put(
+      `${DeployedPaths[Microservice.Authphish]}/api/auth/ext-token`,
+      { halfToken: extToken },
+      { withCredentials: true },
+    );
+  };
 
   const getId = useCallback((): string | undefined => {
     if (!token) return;
     return getParsedJwt<{ id: string }>(token)?.id;
-
   }, [token]);
 
   return {
@@ -118,6 +126,14 @@ function useProvideAuth() {
     signUp,
     signOut,
     sendExtToken,
-    getId
+    getId,
   };
 }
+
+const getCookieId = (): string | undefined => {
+  const cookie = document.cookie
+    .split(";")
+    .find((c) => c.startsWith("user-id="));
+  if (!cookie) return;
+  return cookie.split("=")[1];
+};
