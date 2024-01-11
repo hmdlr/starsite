@@ -1,0 +1,37 @@
+on:
+    push:
+      branches:
+        - main
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+            node-version: '16.x'
+      - name: Setup .npmrc
+        run: |
+          echo "@hmdlr:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.HMDLR_TOKEN }}" >> .npmrc
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: DISABLE_ESLINT_PLUGIN=true npm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: StarSiteBuild
+          path: build
+  Deploy:
+    runs-on: self-hosted
+    needs: Build
+    steps:
+       - name: Download artifacts
+         uses: actions/download-artifact@v3
+         with:
+            name: StarSiteBuild
+            path: build
+       - name: copy files
+         run: |
+           cp -r build/* /var/www/html/starsite
