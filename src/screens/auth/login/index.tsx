@@ -126,7 +126,6 @@ export const Auth = () => {
           <div className={"auth_social_container mt20"}>
             <button
               onClick={async () => {
-                await signOut();
                 window.location.replace(
                   `${DeployedPaths.authphish}/api/auth/federated/google${extTokenQuery}`,
                 );
