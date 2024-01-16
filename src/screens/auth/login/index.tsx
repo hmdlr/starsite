@@ -8,7 +8,7 @@ import { FrontPaths } from "@hmdlr/utils/dist/Microservice";
 
 export const Auth = () => {
   const { popup } = usePopup();
-  const { signIn, sendExtToken } = useAuth();
+  const { signIn, signOut, sendExtToken } = useAuth();
 
   const parameters = new URLSearchParams(window.location.search);
 
@@ -23,6 +23,7 @@ export const Auth = () => {
 
   const signInAction = async () => {
     try {
+      await signOut();
       const response = await signIn(username, password);
       if (response.status === 200) {
         if (parameters.get("ext-token")) {
@@ -113,11 +114,12 @@ export const Auth = () => {
           </div>
           <div className={"auth_social_container mt20"}>
             <button
-              onClick={() =>
+              onClick={async () => {
+                await signOut();
                 window.location.replace(
                   `${DeployedPaths.authphish}/api/auth/federated/google${extTokenQuery}`,
-                )
-              }
+                );
+              }}
             >
               <img
                 src={"/brands/google.svg"}

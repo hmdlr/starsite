@@ -20,7 +20,7 @@ const authContext = React.createContext<{
   /**
    * Sign out the user
    */
-  signOut: () => void;
+  signOut: () => Promise<void>;
   /**
    * Send the extension token to the backend
    * @param extToken
@@ -71,10 +71,12 @@ function useProvideAuth() {
     );
   };
 
-  const signOut = useCallback(() => {
-    document.cookie = "user-id=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    window.location.reload();
-  }, []);
+  const signOut = async () => {
+    await axios.delete(
+      `${DeployedPaths[Microservice.Authphish]}/api/auth/cookies`,
+      { withCredentials: true },
+    );
+  };
 
   return {
     signIn,
