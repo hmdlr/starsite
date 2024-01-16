@@ -1,11 +1,10 @@
 import "../auth.scss";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import { LoadingButton } from "../../../components/loadingButton/LoadingButton";
 import { usePopup } from "../../../hooks/popup/usePopup";
 import { DeployedPaths } from "@hmdlr/utils";
-import { FrontPaths, Microservice } from "@hmdlr/utils/dist/Microservice";
+import { FrontPaths } from "@hmdlr/utils/dist/Microservice";
 
 export const Auth = () => {
   const { popup } = usePopup();
@@ -18,8 +17,6 @@ export const Auth = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
@@ -29,7 +26,7 @@ export const Auth = () => {
       const response = await signIn(username, password);
       if (response.status === 200) {
         if (parameters.get("ext-token")) {
-          await sendExtToken(parameters.get("ext-token") || "");
+          await sendExtToken(parameters.get("ext-token")!);
         }
       } else {
         return popup.error("Invalid username or password.");
@@ -51,7 +48,7 @@ export const Auth = () => {
     (async () => {
       if (oauthState === "success") {
         if (parameters.get("ext-token")) {
-          await sendExtToken(parameters.get("ext-token") || "");
+          await sendExtToken(parameters.get("ext-token")!);
           popup.success("Successfully signed in with the extension 🎊");
         } else {
           popup.success("Successfully signed in ⚡");

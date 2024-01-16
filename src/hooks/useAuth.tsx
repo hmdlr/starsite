@@ -1,8 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import React, { useCallback, useEffect } from "react";
-import { getParsedJwt } from "../utils/utils";
+import React, { useCallback } from "react";
 import { DeployedPaths, Microservice } from "@hmdlr/utils/dist/Microservice";
-import { useStorage } from "./useStorage";
 
 const authContext = React.createContext<{
   signIn: (username: string, password: string) => Promise<AxiosResponse>;
