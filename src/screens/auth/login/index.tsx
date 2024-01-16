@@ -49,7 +49,7 @@ export const Auth = () => {
 
     console.log("cookie id: " + getUserIdCookie());
 
-    if (getUserIdCookie() && (!extToken || !signInCompleted || !oauthState)) {
+    if (getUserIdCookie() && extToken && !oauthState && !signInCompleted) {
       (async () => {
         await signOut();
         // refresh the page to clear the cookie
