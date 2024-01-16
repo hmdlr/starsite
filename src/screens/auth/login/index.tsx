@@ -47,13 +47,15 @@ export const Auth = () => {
     const extToken = parameters.get("ext-token");
     const signInCompleted = parameters.get("signin");
 
-    if (getUserIdCookie() && (!extToken || !signInCompleted || !oauthState)) {
-      (async () => {
-        await signOut();
-        // refresh the page to clear the cookie
-        window.location.reload();
-      })();
-    }
+    console.log("cookie id: " + getUserIdCookie());
+
+    // if (getUserIdCookie() && (!extToken || !signInCompleted || !oauthState)) {
+    //   (async () => {
+    //     await signOut();
+    //     // refresh the page to clear the cookie
+    //     window.location.reload();
+    //   })();
+    // }
 
     (async () => {
       console.log("oauthState", oauthState);
