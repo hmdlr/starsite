@@ -63,7 +63,7 @@ export const Auth = () => {
         }, 1000);
       }
     })();
-  }, []);
+  }, [parameters.get("oauth")]);
 
   return (
     <div className={"auth_container"}>
