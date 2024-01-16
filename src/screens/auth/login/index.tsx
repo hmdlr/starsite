@@ -46,6 +46,7 @@ export const Auth = () => {
     const oauthState = parameters.get("oauth");
 
     (async () => {
+      console.log("oauthState", oauthState);
       if (oauthState === "success") {
         if (parameters.get("ext-token")) {
           await sendExtToken(parameters.get("ext-token")!);
@@ -53,6 +54,8 @@ export const Auth = () => {
         } else {
           popup.success("Successfully signed in ⚡");
         }
+
+        console.log("redirecting...");
         setTimeout(() => {
           window.location.replace(
             `${FrontPaths["workspace"]}?signin=completed`,
