@@ -49,10 +49,13 @@ export const Auth = () => {
     const oauthState = parameters.get("oauth");
 
     (async () => {
-      // get cookie with name "ext-token" and send it to authphish, if present
-      if (parameters.get("ext-token") && oauthState === "success") {
-        await sendExtToken(parameters.get("ext-token") || "");
-        popup.success("Successfully signed in with the extension 🎊");
+      if (oauthState === "success") {
+        if (parameters.get("ext-token")) {
+          await sendExtToken(parameters.get("ext-token") || "");
+          popup.success("Successfully signed in with the extension 🎊");
+        } else {
+          popup.success("Successfully signed in ⚡");
+        }
         setTimeout(() => {
           window.location.replace(
             `${FrontPaths["workspace"]}?signin=completed`,
