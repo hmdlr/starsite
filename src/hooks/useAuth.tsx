@@ -26,6 +26,10 @@ const authContext = React.createContext<{
    * @param extToken
    */
   sendExtToken: (extToken: string) => Promise<any | undefined>;
+  /**
+   * Get the user id from the cookie
+   */
+  getUserIdCookie: () => string | undefined;
 }>(undefined!);
 
 export const ProvideAuth = ({ children }: { children: any }) => {
@@ -78,11 +82,16 @@ function useProvideAuth() {
     );
   };
 
+  const getUserIdCookie = useCallback(() => {
+    return getCookieId();
+  }, []);
+
   return {
     signIn,
     signUp,
     signOut,
     sendExtToken,
+    getUserIdCookie,
   };
 }
 

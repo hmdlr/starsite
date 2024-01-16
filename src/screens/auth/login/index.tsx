@@ -8,7 +8,7 @@ import { FrontPaths } from "@hmdlr/utils/dist/Microservice";
 
 export const Auth = () => {
   const { popup } = usePopup();
-  const { signIn, signOut, sendExtToken } = useAuth();
+  const { signIn, signOut, sendExtToken, getUserIdCookie } = useAuth();
 
   const parameters = new URLSearchParams(window.location.search);
 
@@ -23,7 +23,6 @@ export const Auth = () => {
 
   const signInAction = async () => {
     try {
-      await signOut();
       const response = await signIn(username, password);
       if (response.status === 200) {
         if (parameters.get("ext-token")) {
@@ -45,6 +44,16 @@ export const Auth = () => {
 
   useEffect(() => {
     const oauthState = parameters.get("oauth");
+    const extToken = parameters.get("ext-token");
+    const signInCompleted = parameters.get("signin");
+
+    if (getUserIdCookie() && (!extToken || !signInCompleted || !oauthState)) {
+      (async () => {
+        await signOut();
+        // refresh the page to clear the cookie
+        window.location.reload();
+      })();
+    }
 
     (async () => {
       console.log("oauthState", oauthState);
