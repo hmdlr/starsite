@@ -1,24 +1,23 @@
-import * as React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Auth } from "./screens/auth/login";
-import { Home } from "./screens/home";
 import GradientBody from "./components/gradientBody/GradientBody";
 import Bubbles from "./components/bubbles/FloatingBubbles";
 import { ProvideUrl } from "./hooks/useUrl";
 import { ProvideAuth } from "./hooks/useAuth";
 import { ProvideClient } from "./hooks/useClient";
-import { Navbar } from "./components/navbar/Navbar";
-import { Register } from "./screens/auth/register";
 import { ProvidePopup } from "./hooks/popup/usePopup";
 import { ProvideStorage } from "./hooks/useStorage";
-import { Configure } from "./screens/configuration";
 import { ProvideLoadGuard } from "./hooks/useLoadGuard";
 import { LoadGuardRouter } from "./screens/LoadGuardRouter";
 
-
 export const App = () => {
   return (
-    <div style={{display: 'flex', height: '100vh', width: '100%', overflowX: 'hidden'}}>
+    <div
+      style={{
+        display: "flex",
+        height: "100vh",
+        width: "100%",
+        overflowX: "hidden",
+      }}
+    >
       <ProvideStorage>
         <ProvidePopup>
           <ProvideUrl>
@@ -26,7 +25,7 @@ export const App = () => {
               <ProvideClient>
                 <ProvideLoadGuard>
                   <GradientBody>
-                    <LoadGuardRouter/>
+                    <LoadGuardRouter />
                   </GradientBody>
                 </ProvideLoadGuard>
               </ProvideClient>
@@ -34,7 +33,7 @@ export const App = () => {
           </ProvideUrl>
         </ProvidePopup>
       </ProvideStorage>
-      <Bubbles/>
+      <Bubbles />
     </div>
-  )
+  );
 };
