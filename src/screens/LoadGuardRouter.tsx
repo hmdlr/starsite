@@ -5,6 +5,7 @@ import { Navbar } from "../components/navbar/Navbar";
 import { Auth } from "./auth/login";
 import { Register } from "./auth/register";
 import { Home } from "./home";
+import { PrivacyPolicy } from "./privacy-policy/PrivacyPolicy";
 
 export const LoadGuardRouter = () => {
   const { cacheLoaded, LoadGuard } = useLoadGuard();
@@ -22,6 +23,7 @@ export const LoadGuardRouter = () => {
               <Route path={"/"} element={<Home />} />
               <Route path={"/auth"} element={<Auth />} />
               <Route path={"/auth/register"} element={<Register />} />
+              <Route path={"/privacy-policy"} element={<PrivacyPolicy />} />
             </Routes>
           </Router>
         </>
