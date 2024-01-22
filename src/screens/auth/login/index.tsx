@@ -5,10 +5,12 @@ import { LoadingButton } from "../../../components/loadingButton/LoadingButton";
 import { usePopup } from "../../../hooks/popup/usePopup";
 import { DeployedPaths } from "@hmdlr/utils";
 import { FrontPaths } from "@hmdlr/utils/dist/Microservice";
+import { useAfterAuth } from "../../../hooks/useAfterAuth";
 
 export const Auth = () => {
   const { popup } = usePopup();
-  const { signIn, signOut, sendExtToken, getUserIdCookie } = useAuth();
+  const { signIn, sendExtToken } = useAuth();
+  const { handleAfterAuth } = useAfterAuth();
 
   const parameters = new URLSearchParams(window.location.search);
 
@@ -31,8 +33,7 @@ export const Auth = () => {
       } else {
         return popup.error("Invalid username or password.");
       }
-      // hard redirect to query param "redirect" string, if empty go to "/?signin=completed"
-      const redirect = parameters.get("redirect") || "/?signin=completed";
+      const redirect = `${FrontPaths["workspace"]}?signin=completed`;
       window.location.replace(redirect);
     } catch (e: any) {
       popup.error(
@@ -43,39 +44,8 @@ export const Auth = () => {
   };
 
   useEffect(() => {
-    const oauthState = parameters.get("oauth");
-    const extToken = parameters.get("ext-token");
-    const signInCompleted = parameters.get("signin");
-
-    console.log("cookie id: " + getUserIdCookie());
-
-    if (getUserIdCookie() && extToken && !oauthState && !signInCompleted) {
-      (async () => {
-        await signOut();
-        // refresh the page to clear the cookie
-        window.location.reload();
-      })();
-    }
-
-    (async () => {
-      console.log("oauthState", oauthState);
-      if (oauthState === "success") {
-        if (parameters.get("ext-token")) {
-          await sendExtToken(parameters.get("ext-token")!);
-          popup.success("Successfully signed in with the extension 🎊");
-        } else {
-          popup.success("Successfully signed in ⚡");
-        }
-
-        console.log("redirecting...");
-        setTimeout(() => {
-          window.location.replace(
-            `${FrontPaths["workspace"]}?signin=completed`,
-          );
-        }, 1000);
-      }
-    })();
-  }, [parameters.get("oauth")]);
+    handleAfterAuth();
+  }, [parameters]);
 
   return (
     <div className={"auth_container"}>
